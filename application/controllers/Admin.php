@@ -6,9 +6,9 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        is_logged_in();
+        // is_logged_in();
         $this->load->model('role_m');
-       $this->load->model('admin_m');
+        $this->load->model('admin_m');
         $this->load->model('user_m');
         $this->load->model('penilaian_m');
         $this->load->model('divisi_m');
@@ -31,8 +31,8 @@ class Admin extends CI_Controller
     {
         $data['title'] = 'Admin';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-        $data['id'] =$this->admin_m->id();
-        $data['admin'] =$this->admin_m->get();
+        $data['id'] = $this->admin_m->id();
+        $data['admin'] = $this->admin_m->get();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -44,28 +44,27 @@ class Admin extends CI_Controller
     {
         $data = $this->input->post(null, TRUE);
         $this->admin_m->add($data);
-        $this->user_m->addadmin($data,$level = "1");
+        $this->user_m->addadmin($data, $level = "1");
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">New sub menu added!</div>');
         redirect('admin');
     }
     public function edit()
     {
         $data = $this->input->post(null, TRUE);
-        if (isset($_POST['edit'])) 
-        {
-          $this->admin_m->edit($data);
-          $this->user_m->edit($data);
+        if (isset($_POST['edit'])) {
+            $this->admin_m->edit($data);
+            $this->user_m->edit($data);
         }
 
-        if ($this->db->affected_rows() > 0) 
-        {
-          $params = array("success" => true);
+        if ($this->db->affected_rows() > 0) {
+            $params = array("success" => true);
         } else {
-          $params = array("success" => false);
-        } 
+            $params = array("success" => false);
+        }
         echo json_encode($params);
     }
-    function cart_data() {
+    function cart_data()
+    {
         $data['admin'] = $this->admin_m->get();
         $this->load->view('admin/cart_data', $data);
     }
@@ -75,12 +74,11 @@ class Admin extends CI_Controller
         $id = $this->input->post('id');
         $this->admin_m->del(['kode' => $id]);
         $this->user_m->del(['kode' => $id]);
-        if ($this->db->affected_rows() > 0) 
-        {
-          $params = array("success" => true);
+        if ($this->db->affected_rows() > 0) {
+            $params = array("success" => true);
         } else {
-          $params = array("success" => false);
-        } 
+            $params = array("success" => false);
+        }
         echo json_encode($params);
     }
 
@@ -90,7 +88,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['kode' => $this->session->userdata('kode')])->row_array();
         $query = $this->penilaian_m->getoverview($id)->result_array();
         $data['query'] = $this->penilaian_m->getoverview($id)->result_array();
-        $data['getkategori'] =$this->penilaian_m->getkategori()->result();
+        $data['getkategori'] = $this->penilaian_m->getkategori()->result();
         // $data['query2'] = $this->penilaian_m->getoverview2($id)->result_array();
         // $query2 = $this->penilaian_m->getoverview2($id)->result_array();
         $data['pegawai'] = $this->karyawan_m->get2($id)->row();
@@ -109,10 +107,10 @@ class Admin extends CI_Controller
         $kategori = $this->input->post('kategori');
         $data['kategori'] = $kategori;
         $id = $this->input->post('kode');
-        $query = $this->penilaian_m->getoverview($id,$kategori)->result_array();
-        $data['query'] = $this->penilaian_m->getoverviewdetail($id,$kategori)->result_array();
+        $query = $this->penilaian_m->getoverview($id, $kategori)->result_array();
+        $data['query'] = $this->penilaian_m->getoverviewdetail($id, $kategori)->result_array();
         // $data['query2'] = $this->penilaian_m->getoverviewdetail($id,$kategori)->row();
-        $data['getkategori'] =$this->penilaian_m->getkategori()->result();
+        $data['getkategori'] = $this->penilaian_m->getkategori()->result();
         $data['pegawai'] = $this->karyawan_m->get2($id)->row();
         $data['chart'] = json_encode($query);
         $this->load->view('templates/header', $data);

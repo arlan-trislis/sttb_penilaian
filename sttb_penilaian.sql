@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2020 at 01:22 PM
+-- Generation Time: Sep 21, 2020 at 11:53 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.3.13
 
@@ -35,13 +35,7 @@ CREATE TABLE `admin` (
   `email` varchar(100) NOT NULL,
   `tgl` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id`, `kode`, `nama`, `email`, `tgl`) VALUES
-(9, 'AD20061703', 'Silvia Indrayani', 'silviaindrayani@gmail.com', '2020-06-17');
+-- Error reading data for table sttb_penilaian.admin: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FROM `sttb_penilaian`.`admin`' at line 1
 
 -- --------------------------------------------------------
 
@@ -82,7 +76,7 @@ CREATE TABLE `jabatan` (
 
 INSERT INTO `jabatan` (`id`, `jabatan`) VALUES
 (2, 'Kepala Divisi'),
-(3, 'Wakil Ketua Dua'),
+(3, 'Wakil Ketua 2'),
 (4, 'Pegawai');
 
 -- --------------------------------------------------------
@@ -184,7 +178,16 @@ INSERT INTO `nilai_detail` (`id`, `penilai`, `kode`, `kategori`, `nilai`, `bulan
 (167, 'Silvia Indrayani', '20.97.002', 'Kejujuran', 76, 'Juli 2020', NULL),
 (168, 'Silvia Indrayani', '20.97.002', 'Kerjasama', 80, 'Juli 2020', NULL),
 (169, 'Silvia Indrayani', '20.97.002', 'Prakarsa', 76, 'Juli 2020', NULL),
-(170, 'Silvia Indrayani', '20.97.002', 'Kepemimpinan', 80, 'Juli 2020', NULL);
+(170, 'Silvia Indrayani', '20.97.002', 'Kepemimpinan', 80, 'Juli 2020', NULL),
+(171, 'Silvia', '20.97.002', 'Kedisiplinan', 70, 'September 2020', NULL),
+(172, 'Silvia', '20.97.002', 'Kerjasama', 76, 'September 2020', NULL),
+(173, 'Silvia', '20.97.002', 'Prestasi Kerja', 76, 'September 2020', NULL),
+(174, 'Silvia', '20.97.002', 'Tanggung Jawab', 65, 'September 2020', NULL),
+(175, 'Silvia', '20.97.002', 'Ketaatan', 89, 'September 2020', NULL),
+(176, 'Silvia', '20.97.002', 'Kejujuran', 68, 'September 2020', NULL),
+(177, 'Silvia', '20.97.002', 'Kerjasama', 50, 'September 2020', NULL),
+(178, 'Silvia', '20.97.002', 'Prakarsa', 90, 'September 2020', NULL),
+(179, 'Silvia', '20.97.002', 'Kepemimpinan', 87, 'September 2020', NULL);
 
 -- --------------------------------------------------------
 
@@ -206,7 +209,8 @@ CREATE TABLE `tanggapan` (
 --
 
 INSERT INTO `tanggapan` (`id`, `kode`, `bulan`, `kelebihan`, `kekurangan`, `pelatihan`) VALUES
-(3, '20.97.002', 'Juli 2020', 'Sangat teliti dalam pekerjaan', 'Tingkatkan lagi jiwa kompetitif', '-');
+(3, '20.97.002', 'Juli 2020', 'Sangat teliti dalam pekerjaan', 'Tingkatkan lagi jiwa kompetitif', '-'),
+(4, '20.97.002', 'September 2020', 'AAAAA', 'BBBBB', 'CCCCCC');
 
 -- --------------------------------------------------------
 
@@ -232,7 +236,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `kode`, `email`, `image`, `password`, `level`, `divisi`, `name`, `status`, `createdDate`) VALUES
-(36, 'AD20061701', 'arfi@gmail.com', 'default2.jpg', '$2y$10$NFhumhUXmic/OMS.Lt9ZdeSgcqIhdtZaXbmWjDnFN5XexBTd0UuKy', 1, 0, 'Silvia Indrayani', 1, 1592388446),
+(36, 'AD20061701', 'admin@gmail.com', 'default2.jpg', '$2y$10$w0DtpEUiUqjdjZ71DOAGqO3StM.SsCf79mhXRYpBxeJTe2t3u0r0u', 1, 0, 'Silvia', 1, 1592388446),
 (84, '20.96.001', 'silvia@gmail.com', 'default.jpg', '$2y$10$NwMBe.NfXO9MPnPwhZBXm.Zlj456K0QKuwLRmKibv4xh3z6Q7P0QG', 2, 6, 'Silvia Indrayani', 1, 1593511799),
 (90, '20.97.002', 'silviaindrayani109@gmail.com', 'default.jpg', '$2y$10$b.dL9TO0ceU.OzjiunRLB.AtN/iykzpXlA2cEzLKx5A3qGuON50g2', 4, 6, 'Silvia', 1, 1595604841);
 
@@ -311,7 +315,7 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` (`id`, `role`) VALUES
 (1, 'Administrator'),
 (2, 'Kepala Divisi'),
-(3, 'Ketua Dua'),
+(3, 'Wakil Ketua 2'),
 (4, 'Pegawai');
 
 -- --------------------------------------------------------
@@ -492,13 +496,13 @@ ALTER TABLE `nilai`
 -- AUTO_INCREMENT for table `nilai_detail`
 --
 ALTER TABLE `nilai_detail`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 
 --
 -- AUTO_INCREMENT for table `tanggapan`
 --
 ALTER TABLE `tanggapan`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
